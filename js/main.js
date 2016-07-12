@@ -62,7 +62,7 @@ APP = (function () {
             var address = $('#search-input').val();
             // parse unit if necessary
             
-            var opaUrl = 'https://api.phila.gov/opa/robert-test-staging/address/' + address + '/';
+            var opaUrl = 'https://api.phila.gov/opa/robert-test/address/' + address + '/';
             $.ajax(opaUrl, {
                 data: {format: 'json'},
             })
