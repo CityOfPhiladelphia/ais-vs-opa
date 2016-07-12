@@ -42,18 +42,26 @@ APP = (function () {
         compareAddress: function ()
         {
             state = {};
-            var address = $('#search-input').val();
-            // parse unit if necessary
+            var address = $('#search-input').val(),
+                opaAddress,
+                opaUnit;
             
             // Make sure there's an address
             if (!address || address.length === 0) {
-                // $searchInput.val("Don't forget to enter an address!");
                 for (var i = 0; i < 2; i++) {
                     $searchInput.animate({opacity: '0'}, 500);
                     $searchInput.animate({opacity: '1'}, 500);
                 }
-                // $searchInput.val('');
                 return;
+            }
+                
+            // Get unit, if there is one
+            if (address.indexOf('#') > -1) {
+                opaParts = address.split('#');
+                opaAddress = opaParts[0].trim();
+                opaUnit = opaParts[1].trim();
+            } else {
+                opaAddress = address;
             }
             
             // Clear out DOM elements
@@ -73,7 +81,8 @@ APP = (function () {
             $aisStatus.removeClass('error');
             $opaStatus.removeClass('error');
             
-            var opaUrl = 'https://api.phila.gov/opa/robert-test/address/' + address + '/';
+            var opaUrl = 'https://api.phila.gov/opa/robert-test/address/' + opaAddress + '/' + (opaUnit ? opaUnit : '');
+            console.log(opaUrl);
             $.ajax(opaUrl, {
                 data: {format: 'json'},
             })
@@ -92,7 +101,7 @@ APP = (function () {
                 $opaStatus.addClass('error');
             });
             
-            var aisUrl = 'https://api.phila.gov/ais/v1/addresses/' + address;
+            var aisUrl = 'https://api.phila.gov/ais/v1/addresses/' + encodeURIComponent(address);
             $.ajax(aisUrl, {
                 data: {
                     gatekeeperKey: 'c0eb3e7795b0235dfed5492fcd12a344',
@@ -130,6 +139,7 @@ APP = (function () {
             if (count === 1) {
                 var item = data.data.properties[0];
                 address = item.full_address;
+                if (item.unit) address += (' # ' + parseInt(item.unit, 10));
                 account = item.account_number;
             }
             else if (count > 1) {
