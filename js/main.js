@@ -39,8 +39,23 @@ APP = (function () {
             $searchInput.focus(function (e) { $(this).select(); });
         },
         
-        compareAddress: function (address)
+        compareAddress: function ()
         {
+            state = {};
+            var address = $('#search-input').val();
+            // parse unit if necessary
+            
+            // Make sure there's an address
+            if (!address || address.length === 0) {
+                // $searchInput.val("Don't forget to enter an address!");
+                for (var i = 0; i < 2; i++) {
+                    $searchInput.animate({opacity: '0'}, 500);
+                    $searchInput.animate({opacity: '1'}, 500);
+                }
+                // $searchInput.val('');
+                return;
+            }
+            
             // Clear out DOM elements
             $aisStatus.text('Loading...');
             $opaStatus.text('Loading...');
@@ -57,10 +72,6 @@ APP = (function () {
             elementsToEmpty.forEach(function ($element, i) { $element.empty(); });
             $aisStatus.removeClass('error');
             $opaStatus.removeClass('error');
-            
-            state = {};
-            var address = $('#search-input').val();
-            // parse unit if necessary
             
             var opaUrl = 'https://api.phila.gov/opa/robert-test/address/' + address + '/';
             $.ajax(opaUrl, {
@@ -85,6 +96,7 @@ APP = (function () {
             $.ajax(aisUrl, {
                 data: {
                     gatekeeperKey: 'c0eb3e7795b0235dfed5492fcd12a344',
+                    // include_units: null,
                 },
             })
             .done(APP.renderAis)
