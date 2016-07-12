@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AIS-OPA Viewer</title>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinkit.min.css">-->
+    </head>
+    <body>
+        <div id="search-bar">
+            <input type="text" id="search-input" placeholder="What address would you like to compare?">
+            <button id="search-button"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+        <div>
+            <div id="opa-panel" class="panel">
+                <div class="header">OPA</div>
+                <p><strong>Status: </strong><span id="opa-status"></span></p>
+                <p><strong>Address: </strong><span id="opa-address"></span></p>
+                <p><strong>Account: </strong><span id="opa-account"></span></p>
+                <p><strong>Count: </strong><span id="opa-count"></span></p>
+                <p><strong>Full Response:</strong></p>
+                <pre id="opa-response" class="response"></pre>
+            </div>
+            <div id="ais-panel" class="panel">
+                <div class="header">AIS</div>
+                <p><strong>Status: </strong><span id="ais-status"></span></p>
+                <p><strong>Address: </strong><span id="ais-address"></span></p>
+                <p><strong>Account: </strong><span id="ais-account"></span></p>
+                <p><strong>Count: </strong><span id="ais-count"></span></p>
+                <p><strong>Full Response:</strong></p>
+                <pre id="ais-response" class="response"></pre>
+            </div>
+        </div>
+    </body>
+    
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="js/main.js"></script>
+</html>
