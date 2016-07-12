@@ -96,7 +96,7 @@ APP = (function () {
             $.ajax(aisUrl, {
                 data: {
                     gatekeeperKey: 'c0eb3e7795b0235dfed5492fcd12a344',
-                    // include_units: null,
+                    include_units:  null,
                 },
             })
             .done(APP.renderAis)
@@ -126,8 +126,7 @@ APP = (function () {
                 status: xhr.status,
             };
             $opaStatus.text(state.opa.status);
-            // style
-            
+
             if (count === 1) {
                 var item = data.data.properties[0];
                 address = item.full_address;
@@ -168,8 +167,8 @@ APP = (function () {
                 
             if (count === 1) {
                 var item = data.features[0];
-                address = item.properties.street_address;
-                account = item.properties.opa_account_num;
+                address = item.properties.street_address ? item.properties.street_address : '(none)';
+                account = item.properties.opa_account_num ? item.properties.opa_account_num : '(none)';
             }
             else if (count > 1) {
                 address = '(multiple)';
