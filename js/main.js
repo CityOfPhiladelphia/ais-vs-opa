@@ -81,7 +81,7 @@ APP = (function () {
             $aisStatus.removeClass('error');
             $opaStatus.removeClass('error');
             
-            var opaUrl = 'https://api.phila.gov/opa/robert-test/address/' + opaAddress + '/' + (opaUnit ? opaUnit : '');
+            var opaUrl = '//api.phila.gov/opa/robert-test/address/' + opaAddress + '/' + (opaUnit ? opaUnit : '');
             console.log(opaUrl);
             $.ajax(opaUrl, {
                 data: {format: 'json'},
@@ -101,7 +101,7 @@ APP = (function () {
                 $opaStatus.addClass('error');
             });
             
-            var aisUrl = 'https://api.phila.gov/ais/v1/addresses/' + encodeURIComponent(address);
+            var aisUrl = '//api.phila.gov/ais/v1/addresses/' + encodeURIComponent(address);
             $.ajax(aisUrl, {
                 data: {
                     gatekeeperKey: 'c0eb3e7795b0235dfed5492fcd12a344',
