@@ -106,6 +106,7 @@ APP = (function () {
                 data: {
                     gatekeeperKey: 'c0eb3e7795b0235dfed5492fcd12a344',
                     include_units:  null,
+                    opa_only:       null,
                 },
             })
             .done(APP.renderAis)
